@@ -1,0 +1,118 @@
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+
+            <!-- Collapsed Hamburger -->
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Branding Image -->
+            <a class="navbar-brand" routerLink="/" style="padding: 0px 15px;">
+                <img src="/img/logo.png" alt="PADRÃO" style="width: 75px;">
+            </a>
+            <a class="navbar-brand" routerLink="/">
+                Sistema
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="app-navbar-collapse">
+            <!-- Left Side Of Navbar -->
+            <ul class="nav navbar-nav">
+                    <li *ngIf="usuarioLogado != null && usuarioLogado.permissao != 'INATIVO'" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
+                            Menu
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li *ngIf="usuarioLogado != null && (usuarioLogado.permissao == 'USUARIO' || usuarioLogado.permissao == 'ADMINISTRADOR')">
+                                <a routerLink="/eu" (click)="resetUserId()">
+                                    Usuário
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li *ngIf="usuarioLogado != null && usuarioLogado.permissao == 'ADMINISTRADOR'" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
+                            Administração 
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a routerLink="/usuarios">
+                                    Usuários
+                                </a>
+                            </li>
+                            <li>
+                                <a routerLink="/config">
+                                    Configurações
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                &nbsp;
+            </ul>
+
+            <!-- Right Side Of Navbar -->
+            <ul class="nav navbar-nav navbar-right">
+                <!-- Authentication Links -->
+                <ng-container *ngIf="usuarioLogado && usuarioLogado.id">
+                    <li *ngIf="hackAdmin"><a href="#" style="background-color: red; color: white;" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
+                        Administrador Logado como: </a></li>
+                    <li class="dropdown">
+                        <a *ngIf="hackAdmin" href="#" style="color: red;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
+                            {{ usuarioLogado?.name }} 
+                        </a>
+                        <a *ngIf="!hackAdmin" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
+                            {{ usuarioLogado?.name }} 
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="logout"
+                                    onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                    Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ng-container>
+                <ng-container *ngIf="!usuarioLogado || !usuarioLogado.id">
+                    <li><a href="login">Login</a></li>
+                    <li><a href="register">Cadastrar</a></li>
+                </ng-container>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="app" redimensionar="103">
+
+    <router-outlet></router-outlet>
+
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <p>© Sistema</p>
+    </div>
+</footer>
+
+<div class="modal fade" id="dialogDebug" tabindex="-1" role="dialog" redimensionar="-25" aria-labelledby="dialogDebugTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 800px; width: 800px" role="document">
+        <div class="modal-content" style="width: 800px;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">DEBUG</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" [redimensionar]="300" style="width: 800px;">
+                <iframe id="dialog-debug-iframe" src="" frameborder="0" style="width: 100%;" [redimensionar]="335"></iframe>
+            </div>
+        </div>
+    </div>
+</div>

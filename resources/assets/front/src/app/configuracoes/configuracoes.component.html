@@ -1,0 +1,51 @@
+
+<div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+        <div class="panel-heading">Configurações</div>
+        <div class="panel-body" redimensionar="221" style="overflow-y: scroll;">
+            <p-messages [(value)]="msgs"></p-messages>
+            <div class="tab-pane active" id="personal">
+                <fieldset>
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label text-right pr-0" for="form_email_suporte">Email Suporte</label>
+                        <div class="col-6">
+                            <input pInputText  maxlength="100" placeholder="suporte@sistema.com" class="form-control"
+                                        name="email_suporte"  [(ngModel)]="configuracoes.email_suporte" type="text" id="form_email_suporte" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label text-right pr-0" for="form_prefix_download">Prefixo Downloads</label>
+                        <div class="col-6">
+                            <input pInputText  maxlength="100" placeholder="suporte@sistema.com" class="form-control"
+                                        name="prefix_download"  [(ngModel)]="configuracoes.prefix_download" type="text" id="form_prefix_download" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label text-right pr-0" for="form_separador_email">Separador Email</label>
+                        <div class="col-6">
+                            <input pInputText  maxlength="100" placeholder="suporte@sistema.com" class="form-control"
+                                        name="separador_email"  [(ngModel)]="configuracoes.separador_email" type="text" id="form_separador_email" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label text-right pr-0" for="form_tam_max_upload">Tamanho Máximo Uploads (MB)</label>
+                        <div class="col-6">
+                            <input pInputText  maxlength="100" placeholder="suporte@sistema.com" class="form-control"
+                                        name="tam_max_upload"  [(ngModel)]="configuracoes.tam_max_upload" type="text" id="form_tam_max_upload" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label text-right pr-0" for="form_timezone">Timezone</label>
+                        <div class="col-6">
+                            <input pInputText  maxlength="100" placeholder="suporte@sistema.com" class="form-control"
+                                        name="timezone"  [(ngModel)]="configuracoes.timezone" type="text" id="form_timezone" required>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button style="text-align: center; width: 200px; display: block; margin: auto;" (click)="salvar()" class="btn btn-primary">Salvar</button>
+        </div>
+    </div>
+</div>

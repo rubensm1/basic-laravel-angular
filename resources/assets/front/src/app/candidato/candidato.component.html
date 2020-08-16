@@ -1,0 +1,44 @@
+
+<div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-default">
+        <div class="panel-heading">Usuário</div>
+        <div class="panel-body" redimensionar="221" style="overflow-y: scroll;">
+            <p-messages [(value)]="msgs"></p-messages>
+            <div class="tab-pane active" id="personal">
+                <fieldset>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label text-right pr-0" for="form_login">LOGIN</label>
+                        <div class="col-4">
+                            <span *ngIf="usuarioLogado.permissao != 'ADMINISTRADOR' || usuario.login == 'admin'"  class="form-control">{{usuario.login}}</span>
+                            <input *ngIf="usuarioLogado.permissao == 'ADMINISTRADOR' && usuario.login != 'admin'"  pInputText  maxlength="100" placeholder="Login" class="form-control"
+                                        name="login"  [(ngModel)]="usuario.login" type="text" id="form_login" required>
+                        </div>
+                    </div>
+                    
+                </fieldset>
+                <fieldset>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label text-right pr-0" for="form_name">NOME</label>
+                        <div class="col-8">
+                            <input pInputText  maxlength="100" placeholder="NOME" class="form-control"
+                                        name="name"  [(ngModel)]="usuario.name" type="text" id="form_name" required>
+                        </div>
+                    </div>
+                    
+                </fieldset>
+                <fieldset>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label text-right pr-0" for="form_email">EMAIL</label>
+                        <div class="col-8">
+                            <input pInputText  maxlength="100" placeholder="EMAIL" class="form-control"
+                                        name="email"  [(ngModel)]="usuario.email" type="text" id="form_email" required>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button style="text-align: center; width: 200px; display: block; margin: auto;" (click)="salvar()" class="btn btn-primary">Salvar</button>
+        </div>
+    </div>
+</div>

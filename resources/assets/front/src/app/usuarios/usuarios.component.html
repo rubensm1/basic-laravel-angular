@@ -1,0 +1,91 @@
+
+<div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+        <div class="panel-heading">Usuários</div>
+        <table class="table">
+            <caption>
+                <table>
+                    <tr>
+                        <td class="col-md-1"><label for="filtro" class="col-md-1 control-label">Buscar:</label></td>
+                        <td class="col-md-8"><input id="filtro" type="text" class="form-control" name="filtro" [(ngModel)]="criteria" autofocus></td>
+                    </tr>
+                </table>
+            </caption>
+            <colgroup>
+                <col width="50px"/>
+                <col width="100%"/>
+                <col width="170px"/>
+                <col width="135px"/>
+                <col width="39px"/>
+                <col width="100px"/>
+                <col width="135px"/>
+                <col width="15px"/>
+            </colgroup>
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Login</th>
+                    <th scope="col">Permissão</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+        </table>
+        <div redimensionar="255" style="overflow-y:scroll">
+            <table class="table">
+                <colgroup>
+                    <col width="50px"/>
+                    <col width="100%"/>
+                    <col width="170px"/>
+                    <col width="135px"/>
+                    <col width="39px"/>
+                    <col width="100px"/>
+                    <col width="135px"/>
+                </colgroup>
+                <tbody>
+                    <tr *ngFor="let u of (usuarios | filtroUsuario:criteria)">
+                        <td>{{u.id}}</td>
+                        <td>{{u.name}}</td>
+                        <td>{{u.login}}</td>
+                        <td *ngIf="usuarioTemp.id != u.id">{{u.permissao}}</td>
+                        <td *ngIf="usuarioTemp.id != u.id">
+                            <button type="button" class="btn btn-primary botao-reduzido" title="Alterar Permição" (click)="habilitarEdicao(u.clone())">
+                                <span class="glyphicon glyphicon-user"></span>
+                            </button>
+                        </td>
+                        <td colspan="2" *ngIf="usuarioTemp.id == u.id">
+                            <select id="selectPermissao" class="form-control form-control-micro" (change)="altararPermissao()" (blur)="resetEdit()" [(ngModel)]="usuarioTemp.permissao">
+                                <option value="ADMINISTRADOR">ADMINISTRADOR</option>
+                                <option value="USUARIO">USUARIO</option>
+                                <option value="INATIVO">INATIVO</option>
+                            </select>
+                        </td>
+                        <td>
+                                <a routerLink="/eu" (click)="admCandidato(u.id)" class="btn btn-primary botao-reduzido" style="width: 80px;" >
+                                    <span class="glyphicon glyphicon-list-alt"></span>
+                                    EDITAR
+                                </a>
+                        </td>
+                        <td style="padding-left: 2px;">
+                            <form name="form-logar-como-{{u.id}}" action="/usuarios/logarcomo/{{u.id}}" method="GET">
+                                <button (click)="submeterLogarComo(u.id)" class="btn btn-primary botao-reduzido" style="width: 125px;" >
+                                    <span class="glyphicon glyphicon-education"></span>
+                                    LOGAR COMO
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot class="status-tabela">
+                    <tr *ngIf="status == LOADING"><td colspan="7"><i>Carregando Usuários...</i></td></tr>
+                    <tr *ngIf="salas != null && (usuarios).length == 0 && status == COMPLETE"><td colspan="7"><i>Não Há Usuários para serem listadas</i></td></tr>
+                    <tr *ngIf="status == ERROR"><td class="erro" colspan="7"><i>Falha na obtenção de Usuários!</i></td></tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+

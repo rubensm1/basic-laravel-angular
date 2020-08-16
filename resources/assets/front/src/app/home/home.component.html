@@ -1,0 +1,17 @@
+<div class="content">
+    <div class="title m-b-md">
+        Sistema
+    </div>
+
+    <div class="links">
+        <ng-container *ngIf="usuarioLogado && usuarioLogado.id">
+            <a routerLink="/eu" (click)="resetUserId()">Usuário</a>
+            <a routerLink="/usuarios" *ngIf="usuarioLogado != null && usuarioLogado.permissao == 'ADMINISTRADOR'">Lista de Usuários</a>
+            <a routerLink="/config" *ngIf="usuarioLogado != null && usuarioLogado.permissao == 'ADMINISTRADOR'">Configurações</a>
+        </ng-container>
+        <ng-container *ngIf="!usuarioLogado || !usuarioLogado.id">
+            <a href="login/">Login</a>
+            <a href="register/">Cadastro</a>
+        </ng-container>
+    </div>
+</div>
