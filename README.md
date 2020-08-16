@@ -37,8 +37,8 @@ no diretório da instalação do apache, acesse o arquivo Acesse o arquivo `conf
 Adicione ao final do arquivo, substituindo `<caminho>` pelo diretório do site, configurado no apache
 ```
 <VirtualHost *:80>
-  ServerName inscricao
-  DocumentRoot "<caminho>/processo-seletivo/public"
+  ServerName <sistema>
+  DocumentRoot "<caminho>/<sistema>/public"
 </VirtualHost>
 ```
 
@@ -48,13 +48,13 @@ acesse o arquivo de dns local (no windows: "C:\Windows\System32\drivers\etc\host
 
 Adicione: 
 
-`127.0.0.1   localhost inscricao`
+`127.0.0.1   localhost <sistema>`
 
 ## Configuração do Banco de Dados
 
 1. Acesse o servidor de banco de dados (pelo [phpmyadmin](http://localhost/phpmyadmin/), por exemplo)
 
-2. Crie um banco de dados/esquema de nome `processo_seletivo` (ou o nome que desejar)
+2. Crie um banco de dados/esquema de nome `<sistema>` (ou o nome que desejar)
 
 3. Conectado a este banco, execute o script localizado em `database/script.sql`
 
@@ -65,7 +65,7 @@ Adicione:
 
 ## Acessando
 
-Acesse pelo navegador através do link [http://inscricao](http://inscricao/)
+Acesse pelo navegador através do link [http://<sistema>](http://<sistema>/)
 
 
 ## Pendências
